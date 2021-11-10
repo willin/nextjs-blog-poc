@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
-const withYaml = require('next-plugin-yaml');
 
-module.exports = withYaml({
+module.exports = {
   swcMinify: true,
   reactStrictMode: true,
   trailingSlash: true,
@@ -20,6 +19,12 @@ module.exports = withYaml({
       });
     }
 
+    // insert js-yaml-loader
+    config.module.rules.push({
+      test: /\.ya?ml$/,
+      use: 'js-yaml-loader'
+    });
+
     return config;
   }
-});
+};
