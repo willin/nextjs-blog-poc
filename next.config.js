@@ -1,8 +1,15 @@
-
 /** @type {import('next').NextConfig} */
-module.exports = {
+const withYaml = require('next-plugin-yaml');
+
+module.exports = withYaml({
   swcMinify: true,
   reactStrictMode: true,
+  trailingSlash: true,
+  i18n: {
+    locales: ['en', 'zh'],
+    defaultLocale: 'en',
+    localeDetection: false
+  },
   webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build
     if (!dev && !isServer) {
@@ -15,4 +22,4 @@ module.exports = {
 
     return config;
   }
-};
+});

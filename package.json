@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.4.1",
@@ -18,7 +19,8 @@
     "next-themes": "^0.0.15",
     "preact": "^10.5.15",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "rosetta": "^1.1.0"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.4",
@@ -30,6 +32,9 @@
     "eslint-config-next": "^12.0.3",
     "eslint-config-prettier": "^8.3.0",
     "globby": "^12.0.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "next-plugin-yaml": "^1.0.1",
     "next-remote-watch": "^1.0.0",
     "postcss": "^8.3.11",
     "prettier": "^2.4.1",
@@ -39,5 +44,11 @@
   },
   "resolutions": {
     "preact": "10.5.15"
+  },
+  "lint-staged": {
+    "*.[jt]s?(x)": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
