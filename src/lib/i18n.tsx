@@ -17,7 +17,7 @@ export const I18nContext = createContext<iI18nContext>({} as iI18nContext);
 
 export default function I18n({ children }: { children: ReactNode }) {
   const { locale } = useRouter();
-  const activeLocaleRef = useRef<Languages>('');
+  const activeLocaleRef = useRef<Languages>('' as Languages);
   const [, setTick] = useState(0);
 
   const i18nWrapper = {

@@ -10,8 +10,8 @@ export default function SwitchLocale() {
   return (
     <nav>
       {Locales.map(([locale, label] = ['', '']) => (
-        <Link key={locale} href={asPath} locale={locale} className={locale === activeLocale ? 'current' : ''}>
-          {label}
+        <Link key={locale} href={asPath} locale={locale}>
+          <a className={locale === activeLocale ? 'current' : ''}>{label}</a>
         </Link>
       ))}
     </nav>
