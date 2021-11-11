@@ -1,3 +1,10 @@
+import SwitchLocale from '../switch-locale';
+
 export default function Header() {
-  return <div>Header</div>;
+  return (
+    <div>
+      Header
+      <SwitchLocale />
+    </div>
+  );
 }
