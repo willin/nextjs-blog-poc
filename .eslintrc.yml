@@ -6,3 +6,5 @@ extends:
   - prettier
 parserOptions:
   project: ./tsconfig.json
+  extraFileExtensions:
+    - .mjs

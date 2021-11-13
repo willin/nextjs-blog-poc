@@ -1,16 +1,14 @@
-/* eslint-disable */
-import './index.d';
-import zh from './zh.yml';
-import en from './en.yml';
+import zh from './zh';
+import en from './en';
 
 export const messages = {
   zh,
   en
 };
 
-export type Languages = keyof typeof messages;
-
 export const Locales = [
-  ['zh', '中文'],
-  ['en', 'English']
+  ['zh', '中文', 'zh-CN'],
+  ['en', 'English', 'en-US', 'default']
 ];
+
+export type Languages = keyof typeof messages;

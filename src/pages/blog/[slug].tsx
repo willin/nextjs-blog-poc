@@ -1,47 +1,34 @@
+import { useMDXComponent } from 'next-contentlayer/hooks';
 import Head from 'next/head';
 import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
-import { postFilePaths, getPost } from '../../lib/filesystem';
-import { iPost } from '../../types/post';
+import { allPosts } from '.contentlayer/data';
+import type { Post } from '.contentlayer/types';
 
 const components = {
   Head,
   Link
 };
 
-export default function PostPage({ source, frontMatter }: { source: any; frontMatter: iPost }) {
+export default function PostPage({ post }: { post: Post }) {
+  const Component = useMDXComponent(post.body.code);
   return (
     <article>
-      <h1>{frontMatter.title}</h1>
-      <MDXRemote {...source} components={components} />
+      <h1>{post.title}</h1>
+      <Link href='/blog'>Back</Link>
+      <Component components={components} />
     </article>
   );
 }
-export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
-  const { content, ...data } = getPost(`${params.slug}.mdx`);
 
-  const mdxSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: []
-    },
-    scope: data as any as Record<string, unknown>
-  });
-
+export function getStaticPaths() {
   return {
-    props: {
-      source: mdxSource,
-      frontMatter: data
-    }
-  };
-};
-
-export const getStaticPaths = () => {
-  const paths = postFilePaths.map((path) => path.replace(/\.mdx?$/, '')).map((slug) => ({ params: { slug } }));
-
-  return {
-    paths,
+    paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
     fallback: false
   };
-};
+}
+
+export function getStaticProps({ params }: { params: { slug: string } }) {
+  const post = allPosts.find((post) => post.slug === params.slug);
+
+  return { props: { post } };
+}
