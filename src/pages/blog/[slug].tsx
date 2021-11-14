@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { allPosts } from '.contentlayer/data';
 import type { Post } from '.contentlayer/types';
+import { Locales } from '../../../i18n';
 
 const components = {
   Head,
@@ -20,9 +21,16 @@ export default function PostPage({ post }: { post: Post }) {
   );
 }
 
+const langs = Locales.map((l) => l[0]);
+
 export function getStaticPaths() {
+  const paths = [];
+  for (let i = 0; i < allPosts.length; i += 1) {
+    const p = allPosts[i];
+    paths.push(...langs.map((l) => ({ params: { slug: p.slug }, locale: l })));
+  }
   return {
-    paths: allPosts.map((p) => ({ params: { slug: p.slug } })),
+    paths,
     fallback: false
   };
 }
