@@ -2,35 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
-  background-color: #47a3f3;
-  color: #fefefe;
+* {
+  z-index: 1;
 }
 
-html {
-  min-width: 360px;
-  scroll-behavior: smooth;
-}
+@layer base {
+  ::selection {
+    background-color: #47a3f3;
+    color: #fefefe;
+  }
 
-#__next {
-  @apply bg-gray-50 dark:bg-gray-900;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+  html {
+    min-width: 360px;
+    scroll-behavior: smooth;
+  }
 
-code[class*='language-'],
-pre[class*='language-'] {
-  @apply text-gray-800 dark:text-gray-50;
-}
+  #__next {
+    @apply bg-gray-50;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: color 0.25s ease-in-out;
+  }
 
-pre::-webkit-scrollbar {
-  display: none;
-}
+  #__next::before {
+    content: '';
+    @apply bg-gray-900;
+    position: fixed;
+    border-radius: 50%;
+    width: 250%;
+    height: auto;
+    padding-top: 250%;
+    transform: translate(-100%, -100%);
+    transition: transform var(--transition);
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+  }
 
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  .dark #__next::before {
+    transform: translate(-50%, -50%);
+  }
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    @apply text-gray-800 dark:text-gray-50;
+  }
+
+  pre::-webkit-scrollbar {
+    display: none;
+  }
+
+  pre {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Remove Safari input shadow on mobile */
+  input[type='text'],
+  input[type='email'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  table {
+    display: block;
+    max-width: fit-content;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
 
 .rehype-code-title {
@@ -43,19 +83,4 @@ pre {
 
 .highlight-line {
   @apply block px-4 -mx-4 bg-gray-100 border-l-4 border-blue-500 dark:bg-gray-800;
-}
-
-/* Remove Safari input shadow on mobile */
-input[type='text'],
-input[type='email'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
 }
