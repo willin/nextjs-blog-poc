@@ -29,15 +29,17 @@
     content: '';
     @apply bg-gray-900;
     position: fixed;
-    height: 100%;
-    width: 100%;
-    transform: translateX(-100%);
+    border-radius: 50%;
+    width: 250%;
+    height: auto;
+    padding-top: 250%;
+    transform: translate(-100%, -100%);
     transition: transform var(--transition);
     transition: transform 0.5s ease-in-out;
     z-index: 0;
   }
   .dark #__next::before {
-    transform: translateX(0);
+    transform: translate(-50%, -50%);
   }
 
   code[class*='language-'],
