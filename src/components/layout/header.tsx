@@ -1,5 +1,5 @@
 import SwitchLocale from './switch-locale';
-import SwitchTheme from './switch-theme';
+import SwitchTheme from './dark-mode/switch-theme';
 
 export default function Header() {
   return (

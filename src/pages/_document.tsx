@@ -5,7 +5,7 @@ class MyDocument extends Document<{ locale?: string }> {
     return (
       <Html lang={this.props.locale}>
         <Head />
-        <body className='bg-white dark:bg-black text-black dark:text-white'>
+        <body className='text-black dark:text-white'>
           <Main />
           <NextScript />
         </body>
