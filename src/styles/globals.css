@@ -2,41 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  z-index: 1;
-}
-
 @layer base {
+  * {
+    @apply z-20;
+  }
+
   ::selection {
-    background-color: #47a3f3;
-    color: #fefefe;
+    @apply bg-blue-400 text-gray-50 dark:bg-gray-50 dark:text-blue-400;
   }
 
   html {
-    min-width: 360px;
+    @apply min-w-[360px];
     scroll-behavior: smooth;
   }
 
   #__next {
-    @apply bg-gray-50;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    @apply bg-gray-50 flex flex-col relative min-h-screen;
     transition: color 0.25s ease-in-out;
   }
 
   #__next::before {
     content: '';
-    @apply bg-gray-900;
-    position: fixed;
-    border-radius: 50%;
-    width: 250%;
-    height: auto;
-    padding-top: 250%;
+    @apply bg-gray-900 fixed z-0 h-auto w-[250%] rounded-[50%] pt-[250%];
     transform: translate(-100%, -100%);
-    transition: transform var(--transition);
     transition: transform 0.5s ease-in-out;
-    z-index: 0;
   }
 
   .dark #__next::before {
@@ -60,13 +49,11 @@
   /* Remove Safari input shadow on mobile */
   input[type='text'],
   input[type='email'] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    @apply appearance-none;
   }
 
   table {
-    display: block;
+    @apply block;
     max-width: fit-content;
     overflow-x: auto;
     white-space: nowrap;
