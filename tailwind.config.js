@@ -73,7 +73,8 @@ module.exports = {
     }
   },
   variants: {
-    typography: ['dark']
+    typography: ['dark'],
+    animation: ['responsive', 'hover', 'group-hover']
   },
   plugins: [require('@tailwindcss/typography')]
 };
